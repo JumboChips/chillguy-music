@@ -1,7 +1,7 @@
 ---
 name: planning_template
 about: API 엔드포인트 설계, DB 스키마 정의 등 기획 작업을 위한 템플릿
-title: ''
+title: "[Planning]"
 labels: Design, planning
 assignees: JumboChips
 
