@@ -30,4 +30,11 @@ logging:
     org.springframework: debug # Spring 관련 로그 레벨
     security: debug
 
-
+# Swagger 설정
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    disable-swagger-default-url: true
+  api-docs:
+    path: /v3/api-docs
