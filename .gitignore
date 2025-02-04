@@ -1,0 +1,5 @@
+node_modules/
+blog_fe/node_modules/
+blog_be/target/
+.idea/
+.vscode/
