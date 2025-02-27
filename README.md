@@ -20,17 +20,13 @@ AI가 네 기분과 상황을 알아서 캐치하고, 딱 맞는 노래를 추�
 ### **📌 백엔드 (Backend)**
 - **언어 & 프레임워크**: Spring Boot (Gradle)
 - **데이터베이스**: MySQL
-- **인프라**: AWS (EC2, S3)
 - **API 통신**: RESTful API, OpenAPI (Swagger)
-- **인증 및 보안**: JWT 기반 인증
-- **CI/CD**: GitHub Actions + Jenkins
+- **인증 및 보안**: OAuth (Google, Spotify, Apple)
+- **CI/CD**: GitHub Actions, Docker-compose (Ubuntu Server)
 
 ### **🎨 프론트엔드 (Frontend)**
-- **언어 & 프레임워크**: React.js
+- **언어 & 프레임워크**: Nuxt.js
 - **스타일링**: Tailwind CSS
-- **API 호출**: Axios
-- **상태 관리**: React Query / Redux
-- **빌드 및 배포**: Vercel
 
 ### **🧠 AI & API**
 - **음악 추천 알고리즘**: GPT API 활용
@@ -69,12 +65,16 @@ chillguy-music/
  │   ├── build.gradle
  │   └── README.md
  │
- ├── chillguy-fe/  # 프론트엔드(React)
- │   ├── src/
- │   ├── public/
+ ├── chillguy-fe/  # 프론트엔드(Nuxt.js)
+ │   ├── components/
+ │   ├── pages/
+ │   ├── assets/
+ │   ├── composables/
  │   ├── package.json
  │   ├── .env
- │   ├── README.md
+ │   └── README.md
+ │
+ ├── docker-compose.yml      # 도커 배포 설정
  │
  ├── .github/  # GitHub Actions 및 Issue 템플릿
  │   ├── workflows/
