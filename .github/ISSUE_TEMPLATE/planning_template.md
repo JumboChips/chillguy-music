@@ -24,6 +24,7 @@ assignees: JumboChips
 {
   "key": "value"
 }
+```
 
 ### 2️⃣ 목표 설정
 - [ ] 할 일 1
