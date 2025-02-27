@@ -25,8 +25,6 @@ Chillguy Music 프로젝트에서는 [Conventional Commits](https://www.conventi
 ### 🌱 기본 브랜치
 - `main`: **배포용 브랜치**
 - `dev`: **개발 브랜치**
-- `feature/{기능명}`: **새로운 기능 추가**
-- `hotfix/{버그명}`: **긴급 수정**
 
 ### 🔥 PR 규칙
 1. 모든 PR은 `dev` 브랜치로 요청할 것
