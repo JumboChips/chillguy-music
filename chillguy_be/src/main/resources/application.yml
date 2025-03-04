@@ -1,40 +1,17 @@
-# 공통 설정
-server:
-  port: 8080 # 애플리케이션이 실행될 포트 번호
-
 spring:
   application:
-    name: chillguy # 애플리케이션 이름
-  datasource:
-    url: jdbc:mysql://localhost:3306/chillguy?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: 0409
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update # create, update, validate, none 중 선택
-    show-sql: true # SQL 로그를 출력할지 여부
-    properties:
-      hibernate:
-        format_sql: true # SQL 포맷 설정
+    name: chillguy
+  profiles:
+    active: dev  # 기본값(dev), 배포 시 'prod'로 변경
 
-# 서버 설정
-cors:
-  allowed-origins: "http://localhost:3000"
-  allowed-methods: "GET, POST, PUT, DELETE, OPTIONS"
+server:
+  port: 8080  # 기본 포트 (환경별로 다르게 설정 가능)
 
-# 로그 설정
-logging:
-  level:
-    root: info # 기본 로그 레벨
-    org.springframework: debug # Spring 관련 로그 레벨
-    security: debug
-
-# Swagger 설정
+# Swagger 설정 (배포 환경에서는 비활성화 가능)
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
     operations-sorter: method
     disable-swagger-default-url: true
   api-docs:
-    path: /v3/api-docs
+    enabled: true
