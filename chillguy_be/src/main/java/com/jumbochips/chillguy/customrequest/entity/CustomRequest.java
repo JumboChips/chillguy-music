@@ -1,5 +1,6 @@
 package com.jumbochips.chillguy.customrequest.entity;
 
+import com.jumbochips.chillguy.common.BaseTimeEntity;
 import com.jumbochips.chillguy.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomRequest {
+public class CustomRequest extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

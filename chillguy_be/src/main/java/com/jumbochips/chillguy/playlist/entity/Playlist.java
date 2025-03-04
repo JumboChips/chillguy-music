@@ -1,5 +1,6 @@
 package com.jumbochips.chillguy.playlist.entity;
 
+import com.jumbochips.chillguy.common.BaseTimeEntity;
 import com.jumbochips.chillguy.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Playlist {
+public class Playlist extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -26,6 +27,8 @@ public class Playlist {
     private String name;
 
     private boolean isAiGenerated;
+
+    private String recommendationReason;
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
     private List<PlaylistMusic> playlistMusicList;

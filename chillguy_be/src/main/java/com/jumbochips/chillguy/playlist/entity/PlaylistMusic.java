@@ -1,5 +1,6 @@
 package com.jumbochips.chillguy.playlist.entity;
 
+import com.jumbochips.chillguy.common.BaseTimeEntity;
 import com.jumbochips.chillguy.music.entity.Music;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlaylistMusic {
+public class PlaylistMusic extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,4 +25,6 @@ public class PlaylistMusic {
     @ManyToOne
     @JoinColumn(name = "music_id")
     private Music music;
+
+
 }
