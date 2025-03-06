@@ -55,6 +55,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         setCookie(response, "refreshToken", refreshToken, 1209600); // 14일
 
         // 프론트엔드로 리디렉트 (Nuxt 로그인 성공 페이지)
-        response.sendRedirect(frontendUrl + "/login-success");
+        response.sendRedirect(frontendUrl + "/");
     }
 }
