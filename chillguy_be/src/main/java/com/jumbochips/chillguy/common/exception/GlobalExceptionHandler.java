@@ -26,4 +26,12 @@ public class GlobalExceptionHandler {
         errorResponse.put("message", "예기치 않은 오류가 발생했습니다.");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
+
+    @ExceptionHandler(InvalidJwtException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidJwtException(InvalidJwtException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", "JWT 오류");
+        errorResponse.put("message", ex.getMessage());
+        return ResponseEntity.status(ex.getStatus()).body(errorResponse);
+    }
 }
