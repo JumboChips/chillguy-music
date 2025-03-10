@@ -1,5 +1,21 @@
+<script setup lang="ts">
+const { user, fetchUser } = useAuth();
+
+onMounted(() => {
+  fetchUser();
+})
+</script>
+
 <template>
   <div class="min-h-screen bg-gradient-to-b from-neutral-900 to-neutral-800 text-white p-4">
+      <div>
+    <nav>
+      <NuxtLink to="/">홈</NuxtLink>
+      <span v-if="user">{{ user.name }}님 환영합니다!</span>
+      <NuxtLink v-else to="/login">로그인</NuxtLink>
+    </nav>
+    <slot />
+  </div>
     <main class="max-w-4xl mx-auto py-8">
       <!-- Hero Section -->
       <div class="flex flex-col items-center mb-12 text-center">

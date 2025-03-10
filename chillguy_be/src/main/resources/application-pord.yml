@@ -24,3 +24,6 @@ logging:
     root: info
     org.springframework: warn
     security: warn
+
+frontend:
+  url: "http://localhost:3000"

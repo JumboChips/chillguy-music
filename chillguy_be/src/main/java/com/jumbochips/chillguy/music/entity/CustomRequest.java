@@ -1,4 +1,4 @@
-package com.jumbochips.chillguy.quickoption.entity;
+package com.jumbochips.chillguy.music.entity;
 
 import com.jumbochips.chillguy.common.BaseTimeEntity;
 import com.jumbochips.chillguy.user.entity.User;
@@ -9,12 +9,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "quick_option")
+@Table(name = "custom_request")
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuickOptions extends BaseTimeEntity {
+public class CustomRequest extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -22,7 +22,5 @@ public class QuickOptions extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String mood;        // 기분 (Happy, Sad, Chill 등)
-    private String activity;    // 활동 (운동, 공부 등)
-    private String weather;     // 날씨 (Sunny, Rainy 등)
+    private String userInput;  // 사용자가 입력한 텍스트 요청
 }

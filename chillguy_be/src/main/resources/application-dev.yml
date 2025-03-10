@@ -29,3 +29,6 @@ logging:
     root: debug # 기본 로그 레벨
     org.springframework: debug # Spring 관련 로그 레벨
     security: debug
+
+frontend:
+  url: "http://localhost:3000"
