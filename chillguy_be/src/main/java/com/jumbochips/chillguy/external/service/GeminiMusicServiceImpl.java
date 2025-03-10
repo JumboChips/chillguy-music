@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jumbochips.chillguy.music.dto.MusicResponseDto;
 import com.jumbochips.chillguy.music.dto.QuickOptionRequestDto;
 import com.jumbochips.chillguy.music.dto.TextRecommendationRequestDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
