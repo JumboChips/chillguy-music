@@ -13,7 +13,5 @@ public class MusicResponseDto {
     private String artist;
     private String album;
     private String genre;
-    private String albumCoverUrl;
-    private String sourceUrl;
     private String reason;
 }
