@@ -1,12 +1,18 @@
 package com.jumbochips.chillguy.security.service;
 
+import com.jumbochips.chillguy.security.oauth.GoogleOAuth2UserInfo;
+import com.jumbochips.chillguy.security.oauth.OAuth2UserInfo;
 import com.jumbochips.chillguy.user.entity.User;
+import com.jumbochips.chillguy.user.principal.UserPrincipal;
 import com.jumbochips.chillguy.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -20,10 +26,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
-                .password("") // OAuth2 로그인 사용 시 비밀번호 없음
-                .roles(user.getRole().name()) // Role 설정
-                .build();
+        OAuth2UserInfo userInfo = new GoogleOAuth2UserInfo(Map.of(
+                "email", user.getEmail(),
+                "name", user.getName(),
+                "picture", user.getProfileImageUrl()
+        ));
+
+        return new UserPrincipal(userInfo, Collections.emptyList());
     }
 }

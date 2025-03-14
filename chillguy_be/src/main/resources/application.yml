@@ -15,6 +15,8 @@ spring:
             scope:
               - profile
               - email
+              - openid
+              - https://www.googleapis.com/auth/youtube.force-ssl
 
 gemini:
   url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=

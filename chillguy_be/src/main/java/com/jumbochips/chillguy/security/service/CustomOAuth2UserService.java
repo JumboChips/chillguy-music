@@ -28,13 +28,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId(); // "google" 또는 "spotify"
 
-        OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(registrationId, oAuth2User.getAttributes());
+        Provider provider = Provider.from(registrationId);
+
+        OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(provider, oAuth2User.getAttributes());
 
         if (oAuth2UserInfo.getEmail() == null) {
             throw new OAuth2AuthenticationException("OAuth2 provider did not return email.");
         }
 
-        Provider provider = Provider.from(registrationId);
         Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
 
 
