@@ -22,6 +22,9 @@ gemini:
   url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=
   api-key: ${GEMINI_SECRET_KEY}
 
+youtube:
+  url: https://www.googleapis/com/youtube/v3
+
 
 jwt:
   secret: ${JWT_SECRET_KEY}
