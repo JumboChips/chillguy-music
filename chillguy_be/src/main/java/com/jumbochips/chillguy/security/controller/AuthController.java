@@ -5,6 +5,7 @@ import com.jumbochips.chillguy.security.service.AuthService;
 import com.jumbochips.chillguy.user.repository.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +44,8 @@ public class AuthController {
 
     @Operation(summary = "로그아웃", description = "로그인된 사용자를 로그아웃합니다.")
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(@CookieValue(value = "refreshToken", required = false) String refreshToken, HttpServletResponse response) {
-        authService.logout(refreshToken, response);
+    public ResponseEntity<?> logout(@CookieValue(value = "refreshToken", required = false) String refreshToken, HttpServletRequest request, HttpServletResponse response) {
+        authService.logout(refreshToken, request, response);
         return ResponseEntity.ok("Logged out successfully");
     }
 }

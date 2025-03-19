@@ -15,6 +15,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -28,6 +31,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
+    private final OAuth2AuthorizedClientService authorizedClientService;
 
     @Value("${frontend.url}")
     private String frontendUrl;
@@ -39,7 +43,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         cookie.setSecure(secure); // HTTPS 환경에서 true 설정, 개발환경에서는 false
         cookie.setPath("/");
         cookie.setMaxAge(maxAge);
-        cookie.setAttribute("Samesitre", "None");
         response.addCookie(cookie);
     }
 
@@ -71,17 +74,24 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             userRepository.save(user);
         }
 
+        // JWT 생성
         String accessToken = jwtTokenProvider.generateToken(user.getEmail(), true);
         String refreshToken = jwtTokenProvider.generateToken(user.getEmail(), false);
-
-        // Refresh Token을 DB 또는 Redis에 저장 가능
         user.updateRefreshToken(refreshToken);
         userRepository.save(user);
+
+        // OAuth2 accessToken 가져오기
+        OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient("google", oAuth2User.getName());
+        if (authorizedClient == null) {
+            throw new RuntimeException("Google OAuth2 인증 정보를 찾을 수 없습니다. 다시 로그인 해주세요.");
+        }
+        OAuth2AccessToken googleAccessToken = authorizedClient.getAccessToken();
 
         // 쿠키 저장
         boolean isSecure = !frontendUrl.contains("localhost"); // 로컬에서는 false, 운영에서는 true
         setCookie(response, "accessToken", accessToken, 900, isSecure); // 15분
         setCookie(response, "refreshToken", refreshToken, 1209600, isSecure); // 14일
+        setCookie(response, "googleAccessToken", googleAccessToken.getTokenValue(), (int) googleAccessToken.getExpiresAt().getEpochSecond(), isSecure); // googleAccessToken 저장
 
         // Authorization 헤더 추가 (fetchUser에서 헤더를 통해도 받을 수 있도록)
         response.setHeader("Authorization", "Bearer " + accessToken);

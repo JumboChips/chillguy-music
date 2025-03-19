@@ -5,7 +5,9 @@ import com.jumbochips.chillguy.security.jwt.JwtTokenProvider;
 import com.jumbochips.chillguy.user.entity.User;
 import com.jumbochips.chillguy.user.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -74,7 +76,7 @@ public class AuthService {
     }
 
 
-    public void logout(String refreshToken, HttpServletResponse response) {
+    public void logout(String refreshToken, HttpServletRequest request, HttpServletResponse response) {
         if (refreshToken != null) {
             String email = jwtTokenProvider.getEmailFromToken(refreshToken);
             User user = userRepository.findByEmail(email)
@@ -97,6 +99,18 @@ public class AuthService {
         accessTokenCookie.setPath("/");
         accessTokenCookie.setMaxAge(0);
         response.addCookie(accessTokenCookie);
+
+        Cookie googleAccessTokenCookie = new Cookie("googleAccessToken", null);
+        googleAccessTokenCookie.setHttpOnly(true);
+        googleAccessTokenCookie.setSecure(false);
+        googleAccessTokenCookie.setPath("/");
+        googleAccessTokenCookie.setMaxAge(0);
+        response.addCookie(googleAccessTokenCookie);
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
     }
 
 
