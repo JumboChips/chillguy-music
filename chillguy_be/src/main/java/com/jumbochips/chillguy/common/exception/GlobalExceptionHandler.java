@@ -24,6 +24,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("error", "서버 오류");
         errorResponse.put("message", "예기치 않은 오류가 발생했습니다.");
+        errorResponse.put("stacktrace", ex.getStackTrace().toString());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
