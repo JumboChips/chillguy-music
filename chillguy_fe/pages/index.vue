@@ -21,8 +21,8 @@ const getMusicRecommendations = async (params) => {
     aiExplanation.value = '';
 
     const endpoint = activeSection.value === "quickOptions" 
-      ? "/music/recommend" 
-      : "/music/recommend/text";
+      ? "/api/music/recommend" 
+      : "/api/music/recommend/text";
     
     const data = await useNuxtApp().$apiFetch(endpoint, {
       method: "POST",

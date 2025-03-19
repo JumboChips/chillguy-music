@@ -271,26 +271,21 @@ const toggleSelectAll = () => {
 };
 
 // 플레이리스트에 추가
-const addToPlaylist = () => {
-  // 선택된 노래만 필터링
-  const songsToAdd = selectedSongs.value.map(index => props.recommendations[index]);
-  
-  // 현재 플레이리스트에 추가
-  currentPlaylist.value = [...songsToAdd];
-  
-  // 첫 번째 노래부터 재생
-  currentSongIndex.value = 0;
-  
-  // 모달 닫기
-  showPlaylistModal.value = false;
-  
-  // 성공 메시지 표시
-  successMessage.value = `${songsToAdd.length} songs have been added to your local playlist.`;
-  showSuccessModal.value = true;
-  
-  console.log('Adding to playlist:', songsToAdd);
-  console.log('Playlist name:', playlistName.value);
-};
+    const addToPlaylist = () => {
+      // 선택된 노래만 필터링
+      const songsToAdd = selectedSongs.value.map(index => props.recommendations[index]);
+      
+      // 모달 닫기
+      showPlaylistModal.value = false;
+      
+      // 개발 중 메시지 표시
+      successMessage.value = "음악 플레이어 기능은 현재 개발 중입니다. 곧 사용하실 수 있도록 준비하고 있습니다.";
+      showSuccessModal.value = true;
+      
+      console.log('Adding to playlist:', songsToAdd);
+      console.log('Playlist name:', playlistName.value);
+      console.log('Music player functionality is still in development');
+    };
 
 // YouTube 플레이리스트 생성
 const createYouTubePlaylist = async () => {
@@ -300,7 +295,7 @@ const createYouTubePlaylist = async () => {
     const songsToAdd = selectedSongs.value.map(index => props.recommendations[index]);
 
     // api 호출
-    const createResponse = await useNuxtApp().$apiFetch('/playlist', {
+    const createResponse = await useNuxtApp().$apiFetch('/api/playlist', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
