@@ -7,10 +7,11 @@ spring:
     name: chillguy # 애플리케이션 이름
   datasource:
     url: jdbc:mysql://localhost:3306/chillguy?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: 0409
+    username:
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: create # create, update, validate, none 중 선택
     show-sql: true # SQL 로그를 출력할지 여부
