@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBaseUrl: 'https://chillguy-music.com'
+      apiBaseUrl: process.env.CHILLGUY_FRONTEND_API_URL || 'http://localhost:8081/api'
     }
   },
 })
