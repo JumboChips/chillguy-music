@@ -20,7 +20,7 @@ spring:
 
 # 서버 설정
 cors:
-  allowed-origins: "http://localhost:3000"
+  allowed-origins: "chillguy-music.com"
   allowed-methods: "GET, POST, PUT, DELETE, OPTIONS"
 
 # 로그 설정
@@ -31,4 +31,4 @@ logging:
     security: debug
 
 frontend:
-  url: "http://localhost:3000"
+  url: "chillguy-music.com"

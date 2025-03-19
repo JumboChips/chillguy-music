@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/playlist")
+@RequestMapping("/api/playlist")
 @RequiredArgsConstructor
 @Tag(name = "플레이리스트 관리", description = "사용자의 플레이리스트 생성, 수정, 삭제, 음악 추가/삭제 기능")
 public class PlaylistController {
