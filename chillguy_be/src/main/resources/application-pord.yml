@@ -1,11 +1,12 @@
 spring:
   datasource:
     url: jdbc:mysql://db:3306/chillguy_music?serverTimezone=UTC&characterEncoding=UTF-8
-    username: prod_user
-    password: prod_password
+    username: ${DB_USER_NAME}
+    password: ${DB_PWD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: validate # 운영 환경에서는 validate 추천 (데이터 손실 방지)
     show-sql: false
