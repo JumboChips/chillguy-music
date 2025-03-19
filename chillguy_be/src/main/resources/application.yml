@@ -2,7 +2,7 @@ spring:
   application:
     name: chillguy
   profiles:
-    active: dev  # 기본값(dev), 배포 시 'prod'로 변경
+    active: prod  # 기본값(dev), 배포 시 'prod'로 변경
   config:
     import: optional:file:.env[.properties]
   security:
