@@ -6,7 +6,7 @@ spring:
   application:
     name: chillguy # 애플리케이션 이름
   datasource:
-    url: jdbc:mysql://localhost:3306/chillguy?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/chillguy_music?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: 0409
     driver-class-name: com.mysql.cj.jdbc.Driver
