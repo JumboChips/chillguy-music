@@ -22,9 +22,9 @@ cors:
 # 배포용 로깅 설정 (INFO 수준으로 설정)
 logging:
   level:
-    root: info
-    org.springframework: warn
-    security: warn
+    root: debug
+    org.springframework: debug
+    security: debug
 
 frontend:
   url: "https://chillguy-music.com"
