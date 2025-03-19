@@ -8,7 +8,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: validate # 운영 환경에서는 validate 추천 (데이터 손실 방지)
+      ddl-auto: update # 운영 환경에서는 validate 추천 (데이터 손실 방지)
     show-sql: false
     properties:
       hibernate:
