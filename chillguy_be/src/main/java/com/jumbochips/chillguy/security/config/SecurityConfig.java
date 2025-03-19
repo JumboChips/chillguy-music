@@ -9,10 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.web.AuthenticatedPrincipalOAuth2AuthorizedClientRepository;
@@ -36,11 +34,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtTokenProvider jwtTokenProvider, CustomUserDetailsService customUserDetailsService) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS 설정 추가
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/auth/**", "/music/**", "/playlist/**"))  // OAuth2 인증에는 CSRF 비활성화
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/auth/**", "api/music/**", "api/playlist/**"))  // OAuth2 인증에는 CSRF 비활성화
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/music/**").permitAll() // Preflight 요청 허용
-                        .requestMatchers(HttpMethod.POST, "/music/recommend").authenticated() // 음악 추천 API 허용
+                        .requestMatchers(HttpMethod.OPTIONS, "api/music/**").permitAll() // Preflight 요청 허용
+                        .requestMatchers(HttpMethod.POST, "api/music/recommend").authenticated() // 음악 추천 API 허용
                         .requestMatchers("/", "/login", "/oauth2/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/auth/**").authenticated()
@@ -59,7 +57,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://chillguy-music.com"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3001", "https://chillguy-music.com"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(List.of("*"));
