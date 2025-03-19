@@ -19,6 +19,12 @@ export function useAuth() {
     }
   };
 
+  // 액세스 토큰 가져오기
+  const getAccessToken = () => {
+    return localStorage.getItem('accessToken');
+  };
+
+
   // 로그아웃 (쿠키 삭제)
   const logout = async () => {
     try {
@@ -31,5 +37,5 @@ export function useAuth() {
     window.location.href = "/";
   };
 
-  return { user, fetchUser, logout };
+  return { user, fetchUser, logout, getAccessToken };
 }

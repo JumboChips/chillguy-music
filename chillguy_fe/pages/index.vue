@@ -73,10 +73,7 @@ const handleTextInputSubmit = (text) => {
   });
 };
 
-// 컴포넌트 마운트 시 테스트 데이터 로드 (실제 구현에서는 제거)
-onMounted(() => {
-  getMusicRecommendations({ type: 'test' });
-});
+
 </script>
 
 <template>
