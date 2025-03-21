@@ -1,15 +1,13 @@
 <script setup lang="ts">
 const { user, fetchUser, logout } = useAuth();
 
-onMounted(() => {
-  fetchUser();
-})
-
-watchEffect(() => {
-  if (!user.value) {
-    fetchUser();
+onMounted(async () => {
+  const accessToken = useCookie('accessToken')?.value;
+  if (accessToken) {
+    await fetchUser();
   }
 });
+
 </script>
 
 <template>

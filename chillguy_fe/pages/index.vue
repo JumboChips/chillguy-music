@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from "vue";
-import { useRuntimeConfig } from "#app";
 import QuickOption from "~/components/QuickOption.vue";
 import TextInput from "~/components/TextInput.vue";
 import UserInputOptionButton from "~/components/UserInputOptionButton.vue";
@@ -10,8 +9,6 @@ const activeSection = ref("quickOptions");
 const isLoading = ref(false);
 const recommendations = ref([]);
 const aiExplanation = ref('');
-
-const config = useRuntimeConfig();
 
 // 음악 추천 API 호출 함수
 const getMusicRecommendations = async (params) => {
