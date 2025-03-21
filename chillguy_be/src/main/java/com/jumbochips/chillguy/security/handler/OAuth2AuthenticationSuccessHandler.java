@@ -38,14 +38,13 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     // JWT를 HttpOnly Cookie로 설정하는 메서드
     private void setCookie(HttpServletResponse response, String name, String value, int maxAge, boolean secure) {
-        String cookieString = String.format(
-                "%s=%s; Max-Age=%d; Path=/; Domain=chillguy-music.com; HttpOnly; %s; SameSite=None",
-                name,
-                value,
-                maxAge,
-                secure ? "Secure" : ""
-        );
-        response.addHeader("Set-Cookie", cookieString);
+        Cookie cookie = new Cookie(name, value);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(secure); // HTTPS 환경에서 true 설정, 개발환경에서는 false
+        cookie.setPath("/");
+        cookie.setMaxAge(maxAge);
+        cookie.setDomain("chillguy-music.com");
+        response.addCookie(cookie);
     }
 
 
@@ -100,6 +99,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         response.setHeader("Authorization", "Bearer " + accessToken);
 
         // 프론트엔드로 리디렉트 (Nuxt 로그인 성공 페이지)
-        response.sendRedirect(frontendUrl + "/");
+        response.sendRedirect(frontendUrl + "/login");
     }
 }
