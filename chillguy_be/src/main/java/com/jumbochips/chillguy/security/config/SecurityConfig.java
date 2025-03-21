@@ -1,6 +1,7 @@
 package com.jumbochips.chillguy.security.config;
 
 import com.jumbochips.chillguy.common.exception.CustomOAuth2FailureHandler;
+import com.jumbochips.chillguy.common.log.LoggingFilter;
 import com.jumbochips.chillguy.security.handler.OAuth2AuthenticationSuccessHandler;
 import com.jumbochips.chillguy.security.jwt.JwtAuthenticationFilter;
 import com.jumbochips.chillguy.security.jwt.JwtTokenProvider;
@@ -31,10 +32,12 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
     private final CustomOAuth2FailureHandler customOAuth2FailureHandler;
+    private final LoggingFilter loggingFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtTokenProvider jwtTokenProvider, CustomUserDetailsService customUserDetailsService) throws Exception {
         http
+                .addFilterBefore(loggingFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS 설정 추가
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/auth/**", "api/music/**", "api/playlist/**"))  // OAuth2 인증에는 CSRF 비활성화
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
