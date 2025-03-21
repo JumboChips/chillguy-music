@@ -1,5 +1,6 @@
 package com.jumbochips.chillguy.security.config;
 
+import com.jumbochips.chillguy.common.exception.CustomOAuth2FailureHandler;
 import com.jumbochips.chillguy.security.handler.OAuth2AuthenticationSuccessHandler;
 import com.jumbochips.chillguy.security.jwt.JwtAuthenticationFilter;
 import com.jumbochips.chillguy.security.jwt.JwtTokenProvider;
@@ -29,6 +30,7 @@ import java.util.List;
 public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+    private final CustomOAuth2FailureHandler customOAuth2FailureHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtTokenProvider jwtTokenProvider, CustomUserDetailsService customUserDetailsService) throws Exception {
@@ -47,6 +49,7 @@ public class SecurityConfig {
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
                         .successHandler(oAuth2AuthenticationSuccessHandler)
+                        .failureHandler(customOAuth2FailureHandler)
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, customUserDetailsService),
                         UsernamePasswordAuthenticationFilter.class);
