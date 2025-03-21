@@ -38,13 +38,16 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     // JWT를 HttpOnly Cookie로 설정하는 메서드
     private void setCookie(HttpServletResponse response, String name, String value, int maxAge, boolean secure) {
-        Cookie cookie = new Cookie(name, value);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(secure); // HTTPS 환경에서 true 설정, 개발환경에서는 false
-        cookie.setPath("/");
-        cookie.setMaxAge(maxAge);
-        response.addCookie(cookie);
+        String cookieString = String.format(
+                "%s=%s; Max-Age=%d; Path=/; Domain=chillguy-music.com; HttpOnly; %s; SameSite=None",
+                name,
+                value,
+                maxAge,
+                secure ? "Secure" : ""
+        );
+        response.addHeader("Set-Cookie", cookieString);
     }
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -89,9 +92,9 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         // 쿠키 저장
         boolean isSecure = !frontendUrl.contains("localhost"); // 로컬에서는 false, 운영에서는 true
-        setCookie(response, "accessToken", accessToken, 900, isSecure); // 15분
-        setCookie(response, "refreshToken", refreshToken, 1209600, isSecure); // 14일
-        setCookie(response, "googleAccessToken", googleAccessToken.getTokenValue(), (int) googleAccessToken.getExpiresAt().getEpochSecond(), isSecure); // googleAccessToken 저장
+        setCookie(response, "accessToken", accessToken, 900, true); // 15분
+        setCookie(response, "refreshToken", refreshToken, 1209600, true); // 14일
+        setCookie(response, "googleAccessToken", googleAccessToken.getTokenValue(), (int) googleAccessToken.getExpiresAt().getEpochSecond(), true); // googleAccessToken 저장
 
         // Authorization 헤더 추가 (fetchUser에서 헤더를 통해도 받을 수 있도록)
         response.setHeader("Authorization", "Bearer " + accessToken);
