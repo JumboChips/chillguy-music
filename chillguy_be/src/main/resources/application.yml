@@ -18,7 +18,7 @@ spring:
               - openid
               - https://www.googleapis.com/auth/youtube.force-ssl
               - https://www.googleapis.com/auth/youtube
-            redirect-uri: "https://www.chillguy-music.com/oauth2/callback/google"
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
 
 gemini:
   url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=
