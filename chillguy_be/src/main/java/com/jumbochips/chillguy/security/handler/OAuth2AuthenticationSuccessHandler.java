@@ -99,6 +99,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         response.setHeader("Authorization", "Bearer " + accessToken);
 
         // 프론트엔드로 리디렉트 (Nuxt 로그인 성공 페이지)
-        response.sendRedirect(frontendUrl + "/login");
+        response.sendRedirect(frontendUrl + "/");
     }
 }
