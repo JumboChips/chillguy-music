@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', {
       const { $apiFetch } = useNuxtApp()
 
       try {
-        await $apiFetch(`${config.public.apiBaseUrl}/auth/logout`, { method: 'POST' })
+        await $apiFetch(`${config.public.apiBaseUrl}/api/auth/logout`, { method: 'POST' })
         this.user = null
         window.location.href = '/'
       } catch (e) {
