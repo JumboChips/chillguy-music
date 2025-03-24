@@ -17,7 +17,7 @@ const closeMessage = () => {
 };
 
 const loginWithGoogle = () => {
-  window.location.href = `${config.public.apiBaseUrl}/api/oauth2/authorization/google`;
+  window.location.href = `${config.public.apiBaseUrl}/oauth2/authorization/google`;
 };
 </script>
 
