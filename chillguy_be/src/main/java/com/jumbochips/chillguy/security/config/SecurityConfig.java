@@ -47,7 +47,7 @@ public class SecurityConfig {
                         .requestMatchers("/", "/login", "/oauth2/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/oauth2/**", "/oauth2/callback/**",  "/login/oauth2/**").permitAll()
-                        .requestMatchers("/auth/**").authenticated()
+                        .requestMatchers("/api/auth/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
