@@ -33,7 +33,7 @@ export function useAuth() {
       console.error("로그아웃 실패", error);
     }
 
-    // ✅ 로그아웃 후 홈페이지로 이동
+    // 로그아웃 후 홈페이지로 이동
     window.location.href = "/";
   };
 
