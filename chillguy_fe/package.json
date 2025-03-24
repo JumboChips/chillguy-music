@@ -11,6 +11,7 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.10.1",
     "@tailwindcss/vite": "^4.0.9",
     "nuxt": "^3.16.1",
     "pinia": "^3.0.1",
