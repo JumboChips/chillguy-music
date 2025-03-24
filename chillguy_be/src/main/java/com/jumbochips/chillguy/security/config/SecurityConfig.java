@@ -39,7 +39,7 @@ public class SecurityConfig {
         http
                 .addFilterBefore(loggingFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS 설정 추가
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/auth/**", "api/music/**", "api/playlist/**"))  // OAuth2 인증에는 CSRF 비활성화
+                .csrf(csrf -> csrf.ignoringRequestMatchers("api/auth/**", "api/music/**", "api/playlist/**"))  // OAuth2 인증에는 CSRF 비활성화
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "api/music/**").permitAll() // Preflight 요청 허용
