@@ -86,31 +86,24 @@ public class AuthService {
             userRepository.save(user);
         }
 
-        Cookie refreshTokenCookie = new Cookie("refreshToken", null);
-        refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setSecure(true); // https 환경에서는 true
-        refreshTokenCookie.setPath("/");
-        refreshTokenCookie.setMaxAge(0);
-        response.addCookie(refreshTokenCookie);
-
-        Cookie accessTokenCookie = new Cookie("accessToken", null);
-        accessTokenCookie.setHttpOnly(true);
-        accessTokenCookie.setSecure(true); // https 환경에서는 true
-        accessTokenCookie.setPath("/");
-        accessTokenCookie.setMaxAge(0);
-        response.addCookie(accessTokenCookie);
-
-        Cookie googleAccessTokenCookie = new Cookie("googleAccessToken", null);
-        googleAccessTokenCookie.setHttpOnly(true);
-        googleAccessTokenCookie.setSecure(true); // https 환경에서는 true
-        googleAccessTokenCookie.setPath("/");
-        googleAccessTokenCookie.setMaxAge(0);
-        response.addCookie(googleAccessTokenCookie);
+        response.addCookie(deleteCookie("accessToken"));
+        response.addCookie(deleteCookie("refreshToken"));
+        response.addCookie(deleteCookie("googleAccessToken"));
 
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
+    }
+
+    private Cookie deleteCookie(String name) {
+        Cookie cookie = new Cookie(name, null);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true); // https 환경에서는 true
+        cookie.setPath("/");
+        cookie.setDomain("chillguy-music.com");
+        cookie.setMaxAge(0);
+        return cookie;
     }
 
 
