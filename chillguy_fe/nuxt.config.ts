@@ -11,6 +11,9 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  modules: [
+    '@pinia/nuxt',
+  ],
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.CHILLGUY_FRONTEND_API_URL || 'https://chillguy-music.com'
