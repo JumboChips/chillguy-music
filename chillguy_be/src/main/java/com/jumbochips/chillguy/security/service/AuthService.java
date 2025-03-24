@@ -88,21 +88,21 @@ public class AuthService {
 
         Cookie refreshTokenCookie = new Cookie("refreshToken", null);
         refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setSecure(false);
+        refreshTokenCookie.setSecure(true); // https 환경에서는 true
         refreshTokenCookie.setPath("/");
         refreshTokenCookie.setMaxAge(0);
         response.addCookie(refreshTokenCookie);
 
         Cookie accessTokenCookie = new Cookie("accessToken", null);
         accessTokenCookie.setHttpOnly(true);
-        accessTokenCookie.setSecure(false);
+        accessTokenCookie.setSecure(true); // https 환경에서는 true
         accessTokenCookie.setPath("/");
         accessTokenCookie.setMaxAge(0);
         response.addCookie(accessTokenCookie);
 
         Cookie googleAccessTokenCookie = new Cookie("googleAccessToken", null);
         googleAccessTokenCookie.setHttpOnly(true);
-        googleAccessTokenCookie.setSecure(false);
+        googleAccessTokenCookie.setSecure(true); // https 환경에서는 true
         googleAccessTokenCookie.setPath("/");
         googleAccessTokenCookie.setMaxAge(0);
         response.addCookie(googleAccessTokenCookie);
