@@ -46,7 +46,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "api/music/recommend").authenticated() // 음악 추천 API 허용
                         .requestMatchers("/", "/login", "/oauth2/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/oauth2/**", "/login/oauth2/**").permitAll()
+                        .requestMatchers("/oauth2/**", "/oauth2/callback/**",  "/login/oauth2/**").permitAll()
                         .requestMatchers("/auth/**").authenticated()
                         .anyRequest().authenticated()
                 )
