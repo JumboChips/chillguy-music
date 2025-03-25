@@ -10,12 +10,6 @@ export const useAuthStore = defineStore('auth', {
     async fetchUser() {
       const config = useRuntimeConfig();
       const { $apiFetch } = useNuxtApp();
-      const token = useCookie('accessToken');
-
-      if (!token.value) {
-        this.user = null;
-        return;
-      }
 
       try {
         const data = await $apiFetch<User>(`${config.public.apiBaseUrl}/api/user`)

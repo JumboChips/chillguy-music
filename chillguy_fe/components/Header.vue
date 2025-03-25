@@ -1,16 +1,9 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/auth'
 import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
 
 const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
-
-onMounted(async () => {
-  await authStore.fetchUser()
-  console.log('user:', user.value);
-})
-
 </script>
 
 <template>
