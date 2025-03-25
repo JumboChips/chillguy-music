@@ -6,11 +6,15 @@ import { onMounted } from 'vue';
 const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
 
-onMounted(() => {
-  if(!user.value) {
-    authStore.fetchUser();
+onMounted(async () => {
+  console.log('Header mounted. 현재 user:', user.value)
+
+  if (!user.value) {
+    await authStore.fetchUser()
+    console.log('fetchUser 이후 user:', user.value)
   }
-});
+})
+
 </script>
 
 <template>
