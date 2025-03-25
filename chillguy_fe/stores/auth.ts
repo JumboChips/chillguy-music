@@ -8,26 +8,35 @@ export const useAuthStore = defineStore('auth', {
   }),
   actions: {
     async fetchUser() {
-      const config = useRuntimeConfig()
-      const { $apiFetch } = useNuxtApp()
+      const config = useRuntimeConfig();
+      const { $apiFetch } = useNuxtApp();
+      const token = useCookie('accessToken');
+
+      if (!token.value) {
+        this.user = null;
+        return;
+      }
 
       try {
         const data = await $apiFetch<User>(`${config.public.apiBaseUrl}/api/user`)
-        this.user = data
-        console.log('사용자 정보 불러오기 성공:', data)
+        this.user = data;
+        console.log('사용자 정보 불러오기 성공:', data);
       } catch (e) {
-        console.error('사용자 정보 요청 실패', e)
+        console.error('사용자 정보 요청 실패', e);
+        this.user = null;
       }
     },
     async logout() {
-      const config = useRuntimeConfig()
-      const { $apiFetch } = useNuxtApp()
+      const config = useRuntimeConfig();
+      const { $apiFetch } = useNuxtApp();
+      const router = useRouter();
 
       try {
         await $apiFetch(`${config.public.apiBaseUrl}/api/auth/logout`, { method: 'POST' })
-        this.user = null
+        this.user = null;
+        await router.push('/');
       } catch (e) {
-        console.error('로그아웃 실패', e)
+        console.error('로그아웃 실패', e);
       }
     }
   }
