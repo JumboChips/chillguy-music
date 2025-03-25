@@ -7,12 +7,8 @@ const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
 
 onMounted(async () => {
-  console.log('Header mounted. 현재 user:', user.value)
-
-  if (!user.value) {
-    await authStore.fetchUser()
-    console.log('fetchUser 이후 user:', user.value)
-  }
+  await authStore.fetchUser()
+  console.log('user:', user.value);
 })
 
 </script>
