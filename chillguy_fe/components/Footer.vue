@@ -65,6 +65,16 @@
         <p>&copy; {{ new Date().getFullYear() }} Chillguy Music. All rights reserved.</p>
       </div>
     </div>
+
+    <div class="pt-2 text-center text-xs text-neutral-500">
+  <a href="/privacy" target="_blank" rel="noopener noreferrer" class="underline hover:text-white">
+    개인정보처리방침
+  </a>
+  |
+  <a href="/terms" target="_blank" rel="noopener noreferrer" class="underline hover:text-white">
+    서비스 이용약관
+  </a>
+</div>
   </footer>
 </template>
 
